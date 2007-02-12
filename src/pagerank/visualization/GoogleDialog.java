@@ -50,6 +50,7 @@ public class GoogleDialog extends javax.swing.JDialog
     lblStatus = new javax.swing.JLabel();
     jLabel1 = new javax.swing.JLabel();
     txtMaxResult = new javax.swing.JTextField();
+    jLabel2 = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Google Search");
@@ -82,7 +83,7 @@ public class GoogleDialog extends javax.swing.JDialog
     jLabel1.setFont(new java.awt.Font("Dialog", 0, 12));
     jLabel1.setText("maximal number of results:");
 
-    txtMaxResult.setText("100");
+    txtMaxResult.setText("1");
     txtMaxResult.setInputVerifier(new InputVerifier()
       {
         public boolean verify(JComponent input)
@@ -111,6 +112,9 @@ public class GoogleDialog extends javax.swing.JDialog
         }
       });
 
+      jLabel2.setFont(new java.awt.Font("Dialog", 0, 12));
+      jLabel2.setText("* 100");
+
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
       layout.setHorizontalGroup(
@@ -121,7 +125,9 @@ public class GoogleDialog extends javax.swing.JDialog
             .addGroup(layout.createSequentialGroup()
               .addComponent(jLabel1)
               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-              .addComponent(txtMaxResult, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addComponent(txtMaxResult, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+              .addComponent(jLabel2))
             .addGroup(layout.createSequentialGroup()
               .addComponent(btSearch)
               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -137,7 +143,8 @@ public class GoogleDialog extends javax.swing.JDialog
           .addContainerGap()
           .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
             .addComponent(jLabel1)
-            .addComponent(txtMaxResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(txtMaxResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel2))
           .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
           .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
@@ -159,6 +166,8 @@ public class GoogleDialog extends javax.swing.JDialog
     
     _searchText = searchText;
     
+    final int max = Integer.parseInt(txtMaxResult.getText());
+    
     lblStatus.setText("searching for \"" + searchText + "\"...");
     btClose.setEnabled(true);
     btSearch.setEnabled(false);
@@ -171,7 +180,7 @@ public class GoogleDialog extends javax.swing.JDialog
       protected Object doInBackground() throws Exception
       {
         
-        _data = crawler.run(searchText);
+        _data = crawler.run(searchText, max);
         
         // close window if finished
         _dlg.setVisible(false);
@@ -214,6 +223,7 @@ public class GoogleDialog extends javax.swing.JDialog
   private javax.swing.JButton btClose;
   private javax.swing.JButton btSearch;
   private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel lblStatus;
   private javax.swing.JTextField txtMaxResult;
   private javax.swing.JTextField txtSearch;

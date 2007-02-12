@@ -23,7 +23,7 @@ public class AdvancedCrawler {
      */
     public static void main(String[] args) {
         AdvancedCrawler ac = new AdvancedCrawler();
-        DataStructure ds = ac.run("hu berlin");
+        DataStructure ds = ac.run("hu berlin",1);
         PageRankAlgorithm pageRank = new PageRankAlgorithm(ds);
     
         System.out.println("NACH AUFRUF VON PAGERANKALGORITHM:");
@@ -37,16 +37,39 @@ public class AdvancedCrawler {
     /**
      * Runs the crawler.
      * @param suchwort The word you want to search for.
+     * @param maxNumberOfResults The number of results will be this number times 100.
+     *        The lowest assumed value is 1.    <br>
+     *        The highest accepted value is 10. <br>
+     *        ATTENTION: might produce duplicates
      * @return Valid DataStructure
      */
-    public DataStructure run(String suchwort) {
+    public DataStructure run(String suchwort, int maxNumberOfResults) {
         DataStructure ds = null, actualDS = null;
         boolean ersterAufruf = true;
         String suchergebnis = "";
         
         try {
             suchwort = URLEncoder.encode(suchwort, "UTF-8");
-            suchergebnis = HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100");/* +
+            suchergebnis = HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100");
+            if(maxNumberOfResults >= 2)
+              suchergebnis = suchergebnis + HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=100");
+            if(maxNumberOfResults >= 3)
+              suchergebnis = suchergebnis + HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=200");
+            if(maxNumberOfResults >= 4)
+              suchergebnis = suchergebnis + HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=300");
+            if(maxNumberOfResults >= 5)
+              suchergebnis = suchergebnis + HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=400");
+            if(maxNumberOfResults >= 6)
+              suchergebnis = suchergebnis + HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=500");
+            if(maxNumberOfResults >= 7)
+              suchergebnis = suchergebnis + HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=600");
+            if(maxNumberOfResults >= 8)
+              suchergebnis = suchergebnis + HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=700");
+            if(maxNumberOfResults >= 9)
+              suchergebnis = suchergebnis + HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=800");
+            if(maxNumberOfResults >= 10)
+              suchergebnis = suchergebnis + HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=900");
+            /* +
                     HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=100") +
                     HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=200") +
                     HTTPDownloader.get("http://www.google.de/search?q=" + suchwort + "&num=100&start=300") +

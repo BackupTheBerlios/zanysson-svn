@@ -25,7 +25,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtMaxResult" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="txtMaxResult" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="btSearch" min="-2" max="-2" attributes="0"/>
@@ -47,6 +49,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtMaxResult" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="txtSearch" min="-2" pref="19" max="-2" attributes="0"/>
@@ -111,10 +114,18 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtMaxResult">
       <Properties>
-        <Property name="text" type="java.lang.String" value="100"/>
+        <Property name="text" type="java.lang.String" value="1"/>
         <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new InputVerifier()&#xa;{&#xa;  public boolean verify(JComponent input)&#xa;  {&#xa;    boolean correct = false;&#xa;    try&#xa;    {&#xa;      if(Integer.parseInt(txtMaxResult.getText()) &gt; 0)&#xa;        correct = true;&#xa;    }&#xa;    catch(Exception ex)&#xa;    {&#xa;      correct = false;&#xa;    }&#xa;    &#xa;    if(!correct)&#xa;    {&#xa;      JOptionPane.showMessageDialog(_dlg, &#xa;        &quot;please insert a positive integer&quot;, &#xa;        &quot;input error&quot;,&#xa;        JOptionPane.ERROR_MESSAGE);&#xa;    }&#xa;    &#xa;    return correct;&#xa;    &#xa;  }&#xa;}" type="code"/>
         </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="* 100"/>
       </Properties>
     </Component>
   </SubComponents>
